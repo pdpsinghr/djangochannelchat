@@ -1,0 +1,52 @@
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+    <style type="text/css">
+        input:focus{
+            outline: none;
+        }
+        #room-name-submit {
+            position: absolute;
+            left: 300px;
+            width: 100px;
+            height: 30px;
+            margin-top: 30px;
+            border-radius: 20px;
+            background: gainsboro;
+        }
+        .inputfield{
+            border: none;
+            border-bottom: 1px solid black;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    What chat room would you like to enter?<br/>
+    <input id="room-name-input" placeholder="enter room name" type="text" size="50" class="inputfield"/><br/>
+    <input id="username" placeholder="enter your name" type="text" size="50" class="inputfield"/><br/>
+    <input id="room-name-submit" type="button" value="Enter"/>
+
+    <script>
+        document.querySelector('#room-name-input').focus();
+        // document.querySelector('#room-name-input').onkeyup = function(e) {
+        //     // if (e.keyCode === 13) {  // enter, return
+        //     //     document.querySelector('#room-name-submit').click();
+        //     // }
+        // };
+
+        document.querySelector('#room-name-submit').onclick = function(e) {
+            if (document.querySelector('#username').value == '' || document.querySelector('#room-name-input').value == '') {
+                alert('please enter room name and name')
+            }
+            var roomName = document.querySelector('#room-name-input').value;
+            var username = document.querySelector('#username').value;
+            localStorage.setItem("firstname", username);
+            window.location.pathname = '/chat/' + roomName + '/';
+        };
+    </script>
+</body>
+</html>
