@@ -13,6 +13,9 @@
 <script>
     var roomName = {{ room_name_json }};
     var username = localStorage.getItem("firstname");
+    if(username === null) {
+        window.location.pathname = '/chat/';
+    }
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
