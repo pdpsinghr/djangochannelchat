@@ -11,8 +11,44 @@
     <input id="chat-message-submit" type="button" value="Send"/>
 </body>
 <script>
-    var roomName = {{ room_name_json }};
+    window.onload = function() {
+    
+    };
     var username = localStorage.getItem("firstname");
+    var roomName = {{ room_name_json }};
+    var old_messages = {{ old_messages }};
+    console.log('old', old_messages);
+    old_messages.map((a) => {
+        var message = a[1];
+        var name = a[0];
+        var div = document.createElement("div");
+        var p = document.createElement("p");
+        var br = document.createElement("br");
+        p.style.wordWrap = "break-word";
+        if (name === username) {
+            div.style.background = "blue"
+            div.style.position = "relative"
+            div.style.left = "310px"
+            div.style.width = "200px"
+            div.style.padding = "10px"
+            p.style.margin = "0px"
+            name = "you"
+        } else {
+            p.style.margin = "0px"
+            div.style.display = "block"
+            div.style.background = "green"
+            div.style.width = "200px"
+            div.style.padding = "10px"
+        }
+        div.style.color = "white";
+        p.innerHTML = (message)
+        div.innerHTML = (name + ' : - '  + '\n');
+        div.appendChild(p)
+        div.appendChild(br)
+        document.querySelector('#chat-log').appendChild(br)
+        document.querySelector('#chat-log').scrollTop = document.querySelector('#chat-log').scrollHeight;
+        document.querySelector('#chat-log').append(div)
+    })
     if(username === null) {
         window.location.pathname = '/chat/';
     }
